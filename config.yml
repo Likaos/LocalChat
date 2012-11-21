@@ -1,0 +1,19 @@
+# Pour désactiver un sign, merci de placer un "false"
+# Dans le cas contraire le plugin rechargera la valeur par défaut
+
+# Sign = la phrase doit débuter par ce signe
+# Radius = la portée en cube
+
+# Chuchoter
+whisp-sign: '*'
+whisp-radius: 5
+# Parler localement
+local-radius: 20
+#Crier
+shout-sign: '!'
+shout-radius: 60
+# Hors roleplay
+hrp-sign: '('
+hrp-radius: 20
+# Chat serveur
+global-sign: '='
