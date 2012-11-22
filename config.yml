@@ -1,19 +1,39 @@
 # Pour désactiver un sign, merci de placer un "false"
 # Dans le cas contraire le plugin rechargera la valeur par défaut
 
-# Sign = la phrase doit débuter par ce signe
+# Sign = la phrase doit débuter par ce signe, inclure le signe entre quote (' ') pour eviter les erreurs.
 # Radius = la portée en cube
+# Prefix = Poser un prefix avant le nom du joueur et la phrase, false pour retirer (pas de règles, les parenthèses sont ma mise en forme, à vous d'adapter !
+# Color = la couleur de l'ensemble du message, utilisez les codes couleurs de Minecraft, '&f' pour blanc, '&0' pour noir etc, ne paso ublier les quotes ' '.
+# Codes couleurs: http://www.minecraftwiki.net/wiki/Formatting_codes (utilisez un & et pas un §
+
+#SI VOUS VOULEZ DESACTIVER UNE COMMANDE, mettre le sign sur false aucun besoin de toucher au reste.
 
 # Chuchoter
 whisp-sign: '*'
 whisp-radius: 5
+whisp-prefix: (Chuchoter)
+whisp-color: '&d'
 # Parler localement
 local-radius: 20
+local-prefix: false
+local-color: '&f'
 #Crier
 shout-sign: '!'
 shout-radius: 60
+shout-prefix: (Crier)
+shout-color: '&e'
 # Hors roleplay
 hrp-sign: '('
 hrp-radius: 20
-# Chat serveur
+hrp-prefix: (Hrp)
+hrp-color: '&7'
+# Chat pour le World actuel
+world-sign: '@'
+world-prefix: (Monde)
+world-color: '&9'
+# Chat pour tout le serveur
 global-sign: '='
+global-prefix: (Global)
+global-color: '&2'
+
