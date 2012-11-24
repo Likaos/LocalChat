@@ -1,4 +1,9 @@
 ﻿name: LocalChat
 main: fr.minekahest.localchat.LocalChat
-version: 0.2
+version: 0.3
 author: Likaos
+
+commands:
+    localchat:
+      description: Affiche ou cache les chats locaux.
+      usage: /<command> [show| hide ] pour activer ou désactiver le mode espion.

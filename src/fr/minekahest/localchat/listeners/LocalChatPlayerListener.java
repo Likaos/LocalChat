@@ -1,6 +1,7 @@
 package fr.minekahest.localchat.listeners;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -121,12 +122,13 @@ public class LocalChatPlayerListener implements Listener {
 		
 		for (Player listeningPlayer : plugin.getServer().getOnlinePlayers()) {
 			// Positions des 2 joueurs test�s
-			org.bukkit.Location pLoc = listeningPlayer.getLocation();
-			org.bukkit.Location sLoc = player.getLocation();
-			// Si distance = ok envois, sinon pas de messages
-			if (sLoc.distance(pLoc) <= radius)
-				// Envois du message
-				listeningPlayer.sendMessage(prefix + player.getDisplayName() + ": " + message);
+			Location pLoc = listeningPlayer.getLocation();
+			Location sLoc = player.getLocation();
+			// Si distance = ok ou qu'un op est en ecoute, envois, sinon pas de messages 
+			if (sLoc.distance(pLoc) <= radius || plugin.spies.contains(listeningPlayer.getName())){
+				listeningPlayer.sendMessage(prefix + player.getDisplayName() + ": " + message);				
+			}
+
 		}
 		// On log tout de meme sur le serveur
 		plugin.getLogger().info((prefix + player.getName() + ": " + message).substring(2));
