@@ -1,11 +1,11 @@
-# Pour désactiver un sign, merci de placer un "false"
-# Dans le cas contraire le plugin rechargera la valeur par défaut
+# Pour dÃ©sactiver un sign, merci de placer un "false"
+# Dans le cas contraire le plugin rechargera la valeur par dÃ©faut
 
-# Sign = la phrase doit débuter par ce signe, inclure le signe entre quote (' ') pour eviter les erreurs.
-# Radius = la portée en cube
-# Prefix = Poser un prefix avant le nom du joueur et la phrase, false pour retirer (pas de règles, les parenthèses sont ma mise en forme, à vous d'adapter !
+# Sign = la phrase doit dÃ©buter par ce signe, inclure le signe entre quote (' ') pour eviter les erreurs.
+# Radius = la portÃ©e en cube
+# Prefix = Poser un prefix avant le nom du joueur et la phrase, false pour retirer (pas de rÃ¨gles, les parenthÃ¨ses sont ma mise en forme, Ã  vous d'adapter !
 # Color = la couleur de l'ensemble du message, utilisez les codes couleurs de Minecraft, '&f' pour blanc, '&0' pour noir etc, ne paso ublier les quotes ' '.
-# Codes couleurs: http://www.minecraftwiki.net/wiki/Formatting_codes (utilisez un & et pas un §
+# Codes couleurs: http://www.minecraftwiki.net/wiki/Formatting_codes (utilisez un & et pas un Â§
 
 #SI VOUS VOULEZ DESACTIVER UNE COMMANDE, mettre le sign sur false aucun besoin de toucher au reste.
 
