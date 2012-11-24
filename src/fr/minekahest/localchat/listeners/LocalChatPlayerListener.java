@@ -1,5 +1,7 @@
 package fr.minekahest.localchat.listeners;
 
+import java.util.ArrayList;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -34,18 +36,28 @@ public class LocalChatPlayerListener implements Listener {
 		// On casse le chat classique pour pouvoir gerer l'evenement
 		event.setCancelled(true);
 		
-		// Message global
-		if (event.getMessage().startsWith(plugin.globalSign) && plugin.globalSign != "false") {
-			// Suppresion du signe
+		// Message server
+		if (event.getMessage().startsWith(plugin.serverSign) && plugin.serverSign != "false") {
+			if (isOnFloodCooldown(talkingPlayer, "server")) {
+				talkingPlayer.sendMessage(ChatColor.RED+"Merci d'éviter le flood sur le chan serveur ! :) ");
+				return;
+			}
+			// Suppression du signe
 			msg = msg.substring(1).trim();
-			String finalColoredPrefix = preFormatMessage("global");
+			String finalColoredPrefix = preFormatMessage("server");
 			sendAllMessage(talkingPlayer, finalColoredPrefix, msg);
+			schedulePutAndRemoveFromFloodList(talkingPlayer, plugin.serverFlood, "server");
 		}
 		// Message world actuel
 		else if (event.getMessage().startsWith(plugin.worldSign) && plugin.worldSign != "false") {
+			if (isOnFloodCooldown(talkingPlayer, "world")) {
+				talkingPlayer.sendMessage(ChatColor.RED+"Merci d'éviter le flood sur le chan monde ! :) ");
+				return;
+			}
 			msg = msg.substring(1).trim();
 			String finalColoredPrefix = preFormatMessage("world");
 			sendWorldMessage(talkingPlayer, finalColoredPrefix, msg);
+			schedulePutAndRemoveFromFloodList(talkingPlayer, plugin.serverFlood, "world");
 		}
 		
 		// Message definit pour une zone
@@ -132,5 +144,43 @@ public class LocalChatPlayerListener implements Listener {
 		}
 		// On log tout de meme sur le serveur
 		plugin.getLogger().info((prefix + player.getName() + ": " + message).substring(2));
+	}
+	
+	//Le joueur est-t'il toujours dans la liste de flood ?
+	public boolean isOnFloodCooldown(Player player, String channel) {	
+		if (channel == "world" && plugin.worldFloodTimer.contains(player.getName())) {
+			return true;
+		}
+		else if (channel == "server" && plugin.serverFloodTimer.contains(player.getName())) {
+			return true;
+		}
+		return false;
+	}
+	
+	//Ajoute le joueur et le retire plus tard
+	public void schedulePutAndRemoveFromFloodList(final Player player, int delay, String channel) {
+		
+		ArrayList<String> floodTimerList = null;
+		final String playerName = player.getName();
+		
+		if (channel == "world") {
+		floodTimerList = plugin.worldFloodTimer; 
+		plugin.worldFloodTimer.add(playerName);
+		}
+		else if (channel == "server") {
+		floodTimerList = plugin.serverFloodTimer; 
+		plugin.serverFloodTimer.add(playerName);
+		}
+		
+		final ArrayList<String> finalFloodTimerList = floodTimerList;		
+		
+		Runnable removeTask = new Runnable() {
+			@Override
+			public void run() {
+				finalFloodTimerList.remove(playerName);
+			}
+		};
+		//Lancement de tâche
+		plugin.getServer().getScheduler().runTaskLater(plugin, removeTask, delay);
 	}
 }

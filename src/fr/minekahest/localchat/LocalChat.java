@@ -18,9 +18,11 @@ public class LocalChat extends JavaPlugin {
 	
 	// Variables
 	public static final Logger log = Logger.getLogger("Minecraft");
-	public String whispSign, shoutSign, hrpSign, globalSign, worldSign;
-	public int whispRadius, localRadius, shoutRadius, hrpRadius;
+	public String whispSign, shoutSign, hrpSign, serverSign, worldSign;
+	public int whispRadius, localRadius, shoutRadius, hrpRadius, serverFlood, worldFlood;
 	public ArrayList<String> spies = new ArrayList<String>();
+	public ArrayList<String> worldFloodTimer = new ArrayList<String>();
+	public ArrayList<String> serverFloodTimer = new ArrayList<String>();
 	
 	// VaultSupport
 	public VaultSupport vault;
@@ -39,7 +41,7 @@ public class LocalChat extends JavaPlugin {
 		whispSign = getConfig().getString("whisp-sign");
 		shoutSign = getConfig().getString("shout-sign");
 		hrpSign = getConfig().getString("hrp-sign");
-		globalSign = getConfig().getString("global-sign");
+		serverSign = getConfig().getString("server-sign");
 		worldSign = getConfig().getString("world-sign");
 		
 		// Recuperation des radius de configuration
@@ -47,6 +49,10 @@ public class LocalChat extends JavaPlugin {
 		localRadius = getConfig().getInt("local-radius");
 		shoutRadius = getConfig().getInt("shout-radius");
 		hrpRadius = getConfig().getInt("hrp-radius");
+		
+		//Recuperation des temps de flood et conversion en secondes
+		serverFlood = getConfig().getInt("server-flood")*20;
+		worldFlood = getConfig().getInt("world-flood")*20;
 		
 		// Enregistrement des listeners
 		PluginManager pm = getServer().getPluginManager();
@@ -70,8 +76,9 @@ public class LocalChat extends JavaPlugin {
 		
 	}
 	
+	// Check si vault est actif, assure la compatabilité sans permissions
 	public Boolean permissionSafeCheck(Player player, String permission) {
-		if (this.vault!=null) {
+		if (this.vault != null) {
 			return vault.perms.has(player, permission);
 		}
 		return false;

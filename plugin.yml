@@ -1,6 +1,6 @@
 ﻿name: LocalChat
 main: fr.minekahest.localchat.LocalChat
-version: 0.3
+version: 0.4
 author: Likaos
 
 commands:

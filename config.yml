@@ -6,6 +6,7 @@
 # Prefix = Poser un prefix avant le nom du joueur et la phrase, false pour retirer (pas de règles, les parenthèses sont ma mise en forme, à vous d'adapter !
 # Color = la couleur de l'ensemble du message, utilisez les codes couleurs de Minecraft, '&f' pour blanc, '&0' pour noir etc, ne paso ublier les quotes ' '.
 # Codes couleurs: http://www.minecraftwiki.net/wiki/Formatting_codes (utilisez un & et pas un §
+# server-flood et world-flood définissent le temps minimum entre 2 messages (en secondes) pour le chan world et server
 
 #SI VOUS VOULEZ DESACTIVER UNE COMMANDE, mettre le sign sur false aucun besoin de toucher au reste.
 
@@ -32,8 +33,10 @@ hrp-color: '&7'
 world-sign: '@'
 world-prefix: (Monde)
 world-color: '&9'
+world-flood: 3
 # Chat pour tout le serveur
-global-sign: '='
-global-prefix: (Global)
-global-color: '&2'
+server-sign: '='
+server-prefix: (Serveur)
+server-color: '&2'
+server-flood: 3
 
