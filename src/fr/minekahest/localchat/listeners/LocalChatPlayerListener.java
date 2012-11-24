@@ -97,7 +97,7 @@ public class LocalChatPlayerListener implements Listener {
 	protected void sendWorldMessage(Player talkingPlayer, String finalColoredPrefix, String msg) {
 		// Boucle de verification de joueurs sur le meme monde
 		for (Player p : plugin.getServer().getOnlinePlayers()) {
-			if (p.getWorld() == talkingPlayer.getWorld()) {
+			if (p.getWorld() == talkingPlayer.getWorld() || plugin.spies.contains(p.getName())) {
 				p.sendMessage(finalColoredPrefix + talkingPlayer.getName() + ": " + msg);
 			}
 		}
