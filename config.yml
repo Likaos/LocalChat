@@ -10,6 +10,13 @@
 
 #SI VOUS VOULEZ DESACTIVER UNE COMMANDE, mettre le sign sur false aucun besoin de toucher au reste.
 
+# Mode realiste
+# Définit le nombre de cube supplémentaires par rapport au radius de base, dans lesquels la personne
+# entendra des "bruits" sans capter la conversation, attention ceci est un pourcentage 5 = 5%, 20 = 10%, ne pas rajouter le % :)
+# Mettre le radius a 0 desactive
+real-radius: 20
+real-anonym: false
+
 # Chuchoter
 whisp-sign: '*'
 whisp-radius: 5
@@ -19,7 +26,7 @@ whisp-color: '&d'
 local-radius: 20
 local-prefix: false
 local-color: '&f'
-#Crier
+# Crier
 shout-sign: '!'
 shout-radius: 60
 shout-prefix: (Crier)

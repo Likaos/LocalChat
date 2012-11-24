@@ -1,6 +1,7 @@
 package fr.minekahest.localchat.listeners;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -132,6 +133,9 @@ public class LocalChatPlayerListener implements Listener {
 	// Calcul des distances et envois du message
 	public void checkDistanceAndSendMessage(Player player, Integer radius, String prefix, String message) {
 		
+		//Petit calcul
+		int realRadius = radius + Math.round(radius*plugin.realRadius/100);
+		
 		for (Player listeningPlayer : plugin.getServer().getOnlinePlayers()) {
 			// Positions des 2 joueurs test�s
 			Location pLoc = listeningPlayer.getLocation();
@@ -139,6 +143,17 @@ public class LocalChatPlayerListener implements Listener {
 			// Si distance = ok ou qu'un op est en ecoute, envois, sinon pas de messages 
 			if (sLoc.distance(pLoc) <= radius || plugin.spies.contains(listeningPlayer.getName())){
 				listeningPlayer.sendMessage(prefix + player.getDisplayName() + ": " + message);				
+			}
+			// Mode realiste, le joueur est-il assez proche
+			else if (sLoc.distance(pLoc) <= realRadius) {
+				//Mode anonyme
+				if (plugin.realAnonym) {
+					listeningPlayer.sendMessage(prefix + shake(message));
+				}
+				else {
+					listeningPlayer.sendMessage(prefix + player.getDisplayName() + ": " + shake(message));	
+				}
+
 			}
 
 		}
@@ -182,5 +197,20 @@ public class LocalChatPlayerListener implements Listener {
 		};
 		//Lancement de tâche
 		plugin.getServer().getScheduler().runTaskLater(plugin, removeTask, delay);
+	}
+
+	//Fonction melanger les lettres :p
+	public String shake(String string) {
+		
+		 List<Character> letters = new ArrayList<Character>();
+	        for(char c:string.toCharArray()){
+	            letters.add(c);
+	        }
+	        StringBuilder output = new StringBuilder(string.length());
+	        while(letters.size()!=0){
+	            int randPicker = (int)(Math.random()*letters.size());
+	            output.append(letters.remove(randPicker));
+	        }
+	        return output.toString();
 	}
 }
