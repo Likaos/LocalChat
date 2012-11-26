@@ -18,8 +18,8 @@ public class LocalChat extends JavaPlugin {
 	
 	// Variables
 	public static final Logger log = Logger.getLogger("Minecraft");
-	public String whispSign, shoutSign, hrpSign, serverSign, worldSign;
-	public int whispRadius, localRadius, shoutRadius, hrpRadius, realRadius, serverFlood, worldFlood;
+	public String whispSign, shoutSign, hrpSign, serverSign, worldSign, realLostChar;
+	public int whispRadius, localRadius, shoutRadius, hrpRadius, realRadius, serverFlood, worldFlood, realLostLetters;
 	public boolean realAnonym;
 	public ArrayList<String> spies = new ArrayList<String>();
 	public ArrayList<String> worldFloodTimer = new ArrayList<String>();
@@ -52,6 +52,8 @@ public class LocalChat extends JavaPlugin {
 		// Recuperation des radius du mode realiste
 		realRadius = getConfig().getInt("real-radius");		
 		realAnonym = getConfig().getBoolean("real-anonym");
+		realLostLetters = getConfig().getInt("real-lost-letters");
+		realLostChar = getConfig().getString(("real-lost-char"));
 		// Recuperation des temps de flood et conversion en secondes
 		serverFlood = getConfig().getInt("server-flood") * 20;
 		worldFlood = getConfig().getInt("world-flood") * 20;

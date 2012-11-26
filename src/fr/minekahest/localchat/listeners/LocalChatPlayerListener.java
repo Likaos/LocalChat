@@ -2,6 +2,7 @@ package fr.minekahest.localchat.listeners;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -148,10 +149,10 @@ public class LocalChatPlayerListener implements Listener {
 			else if (sLoc.distance(pLoc) <= realRadius) {
 				//Mode anonyme
 				if (plugin.realAnonym) {
-					listeningPlayer.sendMessage(prefix + shake(message));
+					listeningPlayer.sendMessage(prefix + eatLetters(message));
 				}
 				else {
-					listeningPlayer.sendMessage(prefix + player.getDisplayName() + ": " + shake(message));	
+					listeningPlayer.sendMessage(prefix + player.getDisplayName() + ": " + eatLetters(message));	
 				}
 
 			}
@@ -198,8 +199,35 @@ public class LocalChatPlayerListener implements Listener {
 		//Lancement de tâche
 		plugin.getServer().getScheduler().runTaskLater(plugin, removeTask, delay);
 	}
+	
+	//Fonction pour manger les lettres
+	public String eatLetters(String string) {
+		List<Character> letters = new ArrayList<Character>();
+		Random randPicker = new Random();
+		//Transfert de la String dans la list
+		for (char c:string.toCharArray()) {
+			//Random 100
+			int r = randPicker.nextInt(100);
+			//Si dans le % définit la lettre est perdue (exeption des espaces)
+			if (r < plugin.realLostLetters && c != ' ') {				
+				letters.add(plugin.realLostChar.charAt(0));
+			//Lettre conservée
+			} else {
+				letters.add(c);	
+			}
+		}
+		
+		//Reconstruction de la phrase
+		StringBuilder output = new StringBuilder();
+		for (Character c : letters) {
+			output.append(c);
+		}
+		return output.toString();
+	}
+	
 
 	//Fonction melanger les lettres :p
+	/*
 	public String shake(String string) {
 		
 		 List<Character> letters = new ArrayList<Character>();
@@ -213,4 +241,5 @@ public class LocalChatPlayerListener implements Listener {
 	        }
 	        return output.toString();
 	}
+	*/
 }

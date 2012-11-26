@@ -14,8 +14,13 @@
 # Définit le nombre de cube supplémentaires par rapport au radius de base, dans lesquels la personne
 # entendra des "bruits" sans capter la conversation, attention ceci est un pourcentage 5 = 5%, 20 = 10%, ne pas rajouter le % :)
 # Mettre le radius a 0 desactive
-real-radius: 20
+real-radius: 0
+#Si sur true le nom du joueur sera masqué
 real-anonym: false
+#Le % de chance de perdre chaques lettres lors d'un message distant
+real-lost-letters: 30
+#Le charactère qui va remplacer la lettre
+real-lost-char: '.'
 
 # Chuchoter
 whisp-sign: '*'
